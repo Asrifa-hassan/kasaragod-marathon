@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Register | Kasaragod Marathon{% endblock %}
+{% block content %}
+<section class="form-page"><div class="container">
+ <div class="form-heading"><span class="eyebrow dark">10 JANUARY 2027 · FREEDOM SQUARE</span><h1>CLAIM YOUR <em>START LINE.</em></h1><p>Complete your details below to create a registration booking.</p></div>
+ <div class="form-layout"><form method="post" novalidate class="registration-form">{% csrf_token %}
+  {% if form.non_field_errors %}<div class="alert alert-danger">{{ form.non_field_errors }}</div>{% endif %}
+  <div class="form-section"><div class="form-section-title"><span>01</span><div><h2>Choose your race</h2><p>Select the distance you want to run.</p></div></div>
+   <div class="race-options">{% for value,label in form.race_category.field.choices %}<label class="race-option"><input type="radio" name="race_category" value="{{ value }}" {% if form.race_category.value == value or not form.race_category.value and value == '5K' %}checked{% endif %}><span><b>{{ value }}</b><small>{{ label }}</small></span><strong>{% if value == '5K' %}₹675{% elif value == '10K' %}₹725{% else %}₹840{% endif %}</strong></label>{% endfor %}</div>{{ form.race_category.errors }}
+  </div>
+  <div class="form-section"><div class="form-section-title"><span>02</span><div><h2>Runner details</h2><p>Enter the participant's details accurately.</p></div></div>
+   <div class="row g-3">
+   {% for field in form %}{% if field.name != 'race_category' and field.name != 'terms_accepted' and field.name != 'address' and field.name != 'team_name' %}<div class="col-md-6"><label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{% if field.help_text %}<div class="form-text">{{ field.help_text }}</div>{% endif %}{{ field.errors }}</div>{% endif %}{% endfor %}
+   <div class="col-12"><label class="form-label" for="{{ form.team_name.id_for_label }}">Team / organisation (optional)</label>{{ form.team_name }}{{ form.team_name.errors }}</div>
+   <div class="col-12"><label class="form-label" for="{{ form.address.id_for_label }}">Full residential address</label>{{ form.address }}{{ form.address.errors }}</div>
+   </div>
+  </div>
+  <div class="form-section"><div class="form-section-title"><span>03</span><div><h2>Declaration</h2><p>Please read the event rules before continuing.</p></div></div>
+   <div class="form-check">{{ form.terms_accepted }}<label class="form-check-label" for="{{ form.terms_accepted.id_for_label }}">I confirm that the details are correct and agree to the <a href="{% url 'rules' %}" target="_blank">event rules and declaration</a>.</label></div>{{ form.terms_accepted.errors }}
+  </div>
+  <button class="btn btn-lime btn-lg w-100" type="submit">Submit registration <span>↗</span></button>
+  <p class="secure-note">Demo mode: this form saves your booking in the Django database. It does not collect or process payment.</p>
+ </form>
+ <aside class="form-aside"><span class="eyebrow">EVENT DETAILS</span><h3>RUN FOR<br><em>LIFE.</em></h3><p>Sunday, 10 January 2027</p><p>Freedom Square<br>Kasaragod Beach, Kerala</p><hr><h4>Before you register</h4><ul><li>5K minimum age: 5 years</li><li>10K and 21K minimum age: 15 years</li><li>Age is calculated on event day</li><li>Entries are individual</li><li>Registration is non-transferable</li></ul><a href="{% url 'rules' %}">Read all event rules ↗</a></aside>
+ </div></div></section>
+{% endblock %}

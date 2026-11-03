@@ -1,0 +1,42 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101b18">
+  <title>{% block title %}Kasaragod Marathon{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark site-nav">
+  <div class="container">
+    <a class="navbar-brand brand" href="{% url 'home' %}"><span class="brand-mark">K</span> Kasaragod<span class="brand-light"> MARATHON</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <div class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+        <a class="nav-link" href="{% url 'home' %}#about">About</a>
+        <a class="nav-link" href="{% url 'home' %}#races">Race categories</a>
+        <a class="nav-link" href="{% url 'rules' %}">Event rules</a>
+        <a class="btn btn-lime nav-register" href="{% url 'register' %}">Register now <span>↗</span></a>
+      </div>
+    </div>
+  </div>
+</nav>
+{% if messages %}<div class="container pt-3">{% for message in messages %}<div class="alert alert-{{ message.tags }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+{% block content %}{% endblock %}
+<footer class="footer">
+  <div class="container footer-inner">
+    <div><a class="navbar-brand brand" href="{% url 'home' %}"><span class="brand-mark">K</span> Kasaragod<span class="brand-light"> MARATHON</span></a><p class="footer-note">No to drugs. Run for life.</p></div>
+    <div class="footer-contact"><span>EVENT HELP DESK</span><a href="tel:+919847591518">+91 1234567890</a><a href="mailto:helpdesk@mpp.co.in">helpdesk@mpp.co.in</a></div>
+<!--    <div class="footer-copy">© 2026 Kasaragod Marathon recreation. <br>Independent demo project — not the official event website.</div>-->
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</body></html>
+

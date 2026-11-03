@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Kasaragod Marathon 2027 | Run for Life{% endblock %}
+{% block content %}
+<header class="hero">
+  <div class="hero-photo"></div><div class="hero-shade"></div>
+  <div class="container hero-content">
+    <div class="eyebrow"><span class="live-dot"></span> THE SECOND EDITION · Kasaragod</div>
+    <h1>RUN TOGETHER.<br><em>GET STRONGER.</em></h1>
+    <p class="hero-lead">One city. One coastline. Thousands of stories.<br>Be part of the movement for a healthier tomorrow.</p>
+    <div class="hero-actions"><a class="btn btn-lime btn-lg" href="{% url 'register' %}">Secure your spot <span>↗</span></a><a class="text-link" href="#races">Explore race categories ↓</a></div>
+    <div class="hero-bottom">
+      <div><small>RACE DAY</small><strong>10 JAN <b>2027</b></strong></div>
+      <div><small>START / FINISH</small><strong>FREEDOM SQUARE</strong></div>
+      <div><small>LOCATION</small><strong>Kasaragod BEACH</strong></div>
+    </div>
+  </div>
+  <div class="hero-vertical">NO TO DRUGS · RUN FOR LIFE</div>
+</header>
+<section class="ticker"><div>FITNESS <i>✳</i> UNITY <i>✳</i> COMMUNITY <i>✳</i> NO TO DRUGS <i>✳</i> RUN FOR LIFE <i>✳</i> FITNESS <i>✳</i></div></section>
+<section class="section races-section" id="races">
+  <div class="container">
+    <div class="section-head"><div><span class="eyebrow dark">FIND YOUR DISTANCE</span><h2>PICK YOUR <em>CHALLENGE.</em></h2></div><p>Early bird rates are shown below as displayed on the event information page. Choose the distance that feels right for you.</p></div>
+    <div class="row g-4">
+      {% for race in races %}
+      <div class="col-md-4"><article class="race-card {% if race.code == '21K' %}race-featured{% endif %}">
+        <div class="race-top"><span>{{ race.code }}</span><span class="race-tag">{{ race.name }}</span></div>
+        <h3>{{ race.distance }}</h3><p>{{ race.description }}</p><div class="race-age">MINIMUM AGE · {{ race.age }}</div>
+        <div class="price"><strong>₹{{ race.price }}</strong><del>₹{{ race.original }}</del></div>
+        <ul><li>Race T-shirt & bib</li><li>Finisher medal & e-certificate</li><li>Hydration and medical support</li><li>Tagged photos & breakfast</li></ul>
+        {% if race.code != '5K' %}<div class="chip-note">Timing chip included</div>{% endif %}
+        <a class="btn {% if race.code == '21K' %}btn-lime{% else %}btn-outline-dark{% endif %} w-100" href="{% url 'register' %}">Register for {{ race.code }} <span>↗</span></a>
+      </article></div>
+      {% endfor %}
+    </div>
+    <p class="fine-print">Prices and event information are reproduced for demonstration from publicly visible event details. Confirm current fees and availability with the organisers before making payments.</p>
+  </div>
+</section>
+<section class="prize-section">
+ <div class="container"><div class="section-head light"><div><span class="eyebrow">PUSH YOUR LIMITS</span><h2>RACE FOR THE <em>PODIUM.</em></h2></div><p>Cash prizes for the top three finishers in the 21K and 10K categories, for men and women.</p></div>
+ <div class="row g-3">
+  <div class="col-md-6"><div class="prize-card"><span>21K · HALF MARATHON</span><div class="prize-row"><b>01</b><strong>₹50,000</strong><small>FIRST PLACE</small></div><div class="prize-row"><b>02</b><strong>₹25,000</strong><small>SECOND PLACE</small></div><div class="prize-row"><b>03</b><strong>₹15,000</strong><small>THIRD PLACE</small></div></div></div>
+  <div class="col-md-6"><div class="prize-card"><span>10K · TIMED RUN</span><div class="prize-row"><b>01</b><strong>₹30,000</strong><small>FIRST PLACE</small></div><div class="prize-row"><b>02</b><strong>₹20,000</strong><small>SECOND PLACE</small></div><div class="prize-row"><b>03</b><strong>₹10,000</strong><small>THIRD PLACE</small></div></div></div>
+ </div><div class="age-prize"><span>50+ AGE CATEGORY</span><strong>₹25,000</strong><small>Fastest finisher · male and female</small></div></div>
+</section>
+<section class="about-section section" id="about"><div class="container"><div class="row align-items-center g-5">
+ <div class="col-lg-6"><div class="about-image"><div class="image-caption">Kasaragod · KERALA · INDIA</div></div></div>
+ <div class="col-lg-6"><span class="eyebrow dark">MORE THAN A MARATHON</span><h2>EVERY STEP<br>HAS A <em>PURPOSE.</em></h2><p>Mathrubhumi India's VKC Kasaragod Marathon brings together runners of every background to celebrate fitness, unity and community spirit. The 2027 edition carries a clear message: “No to drugs. Run for life.”</p><div class="values"><span>01 / FITNESS</span><span>02 / UNITY</span><span>03 / COMMUNITY</span><span>04 / A DRUG-FREE LIFE</span></div><a class="btn btn-dark mt-4" href="{% url 'register' %}">Be part of the run ↗</a></div>
+</div></div></section>
+<section class="sponsors-section"><div class="container"><span class="eyebrow dark">POWERING THE RUN</span><h2>OUR <em>PARTNERS.</em></h2><div class="sponsor-grid"><div><small>TITLE SPONSOR</small><strong>INDIA'S VKC</strong></div><div><small>POWERED BY</small><strong>MEITRA HOSPITAL</strong></div><div><small>POWERED BY</small><strong>BMH</strong></div><div><small>MALL PARTNER</small><strong>LuLu Mall</strong></div><div><small>RIDING PARTNER</small><strong>KVR HYUNDAI</strong></div><div><small>MEDIA PARTNER</small><strong>MATHRUBHUMI</strong></div></div></div></section>
+<section class="final-cta"><div class="container"><span class="eyebrow">THE START LINE IS WAITING</span><h2>YOUR NEXT STORY<br>STARTS <em>HERE.</em></h2><a href="{% url 'register' %}" class="btn btn-lime btn-lg">Register now ↗</a></div></section>
+{% endblock %}

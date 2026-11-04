@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponse
 from openpyxl import Workbook
+from openpyxl.styles import Font, PatternFill, Alignment
 from .models import Registration
 
 def export_registrations_excel(modeladmin, request, queryset):
@@ -18,6 +19,15 @@ def export_registrations_excel(modeladmin, request, queryset):
     ]
 
     sheet.append(headers)
+    # Style heading row
+    for cell in sheet[1]:
+        cell.font = Font(bold=True, color="FFFFFF")
+        cell.fill = PatternFill(
+            start_color="4338CA",
+            end_color="4338CA",
+            fill_type="solid"
+        )
+        cell.alignment = Alignment(horizontal="center")
 
     for registration in queryset:
         sheet.append([
@@ -25,7 +35,8 @@ def export_registrations_excel(modeladmin, request, queryset):
             registration.full_name,
             registration.bib_name,
             registration.race_category,
-            registration.date_of_birth,
+            registration.date_of_birth.strftime("%d-%m-%Y")
+            if registration.date_of_birth else "",
             registration.gender,
             registration.mobile,
             registration.whatsapp,
@@ -44,6 +55,21 @@ def export_registrations_excel(modeladmin, request, queryset):
             registration.created_at.strftime("%Y-%m-%d %H:%M")
             if registration.created_at else "",
         ])
+
+    # Automatically adjust column widths
+    for column in sheet.columns:
+        max_length = 0
+        column_letter = column[0].column_letter
+
+        for cell in column:
+            if cell.value:
+                max_length = max(max_length, len(str(cell.value)))
+
+        sheet.column_dimensions[column_letter].width = max_length + 4
+
+    # Add filters and freeze heading row
+    sheet.auto_filter.ref = sheet.dimensions
+    sheet.freeze_panes = "A2"
 
     response = HttpResponse(
         content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"

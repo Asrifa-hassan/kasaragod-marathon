@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark site-nav">
   <div class="container">
-    <a class="navbar-brand brand" href="{% url 'home' %}"><span class="brand-mark">K</span> Kasaragod<span class="brand-light"> MARATHON</span></a>
+    <a class="navbar-brand brand" href="{% url 'home' %}"><span class="brand-mark"><img src="{% static 'images/favicon.ico' %}" alt="Logo" style="height:40px;"></span></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
     <div class="collapse navbar-collapse" id="mainNav">
       <div class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
@@ -31,7 +31,7 @@
 {% block content %}{% endblock %}
 <footer class="footer">
   <div class="container footer-inner">
-    <div><a class="navbar-brand brand" href="{% url 'home' %}"><span class="brand-mark">K</span> Kasaragod<span class="brand-light"> MARATHON</span></a><p class="footer-note">No to drugs. Run for life.</p></div>
+    <div><a class="navbar-brand brand" href="{% url 'home' %}"><span class="brand-mark"><img src="{% static 'images/favicon.ico' %}" alt="Logo" style="height:40px;"></span></a><p class="footer-note">No to drugs. Run for life.</p></div>
     <div class="footer-contact"><span>EVENT HELP DESK</span><a href="tel:+919847591518">+91 1234567890</a><a href="mailto:helpdesk@mpp.co.in">helpdesk@mpp.co.in</a></div>
 <!--    <div class="footer-copy">© 2026 Kasaragod Marathon recreation. <br>Independent demo project — not the official event website.</div>-->
   </div>

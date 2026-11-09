@@ -16,6 +16,10 @@ class Registration(models.Model):
     PAYMENT_CHOICES = [
         ("PENDING", "Pending"), ("PAID", "Paid"), ("FAILED", "Failed"),
     ]
+    PAYMENT_METHOD_CHOICES = [
+        ("UPI", "UPI QR"),
+        ("CASH", "Cash"),
+    ]
 
     booking_id = models.CharField(max_length=14, unique=True, editable=False)
     race_category = models.CharField(max_length=3, choices=RACE_CHOICES)
@@ -36,6 +40,11 @@ class Registration(models.Model):
     team_name = models.CharField(max_length=120, blank=True)
     amount = models.PositiveIntegerField()
     payment_status = models.CharField(max_length=10, choices=PAYMENT_CHOICES, default="PENDING")
+    payment_method = models.CharField(
+        max_length=10,
+        choices=PAYMENT_METHOD_CHOICES,
+        default="UPI"
+    )
     payment_reference = models.CharField(max_length=100, blank=True)
     terms_accepted = models.BooleanField(default=False)
     created_at = models.DateTimeField(default=timezone.now)

@@ -12,7 +12,7 @@ class RegistrationForm(forms.ModelForm):
             "race_category", "full_name", "bib_name", "date_of_birth", "gender",
             "mobile", "whatsapp", "email", "emergency_contact", "blood_group",
             "t_shirt_size", "team_name", "address", "city", "state", "pincode",
-            "terms_accepted",
+            "payment_method", "terms_accepted",
         ]
         widgets = {
             "date_of_birth": forms.DateInput(attrs={"type": "date"}),
@@ -28,6 +28,7 @@ class RegistrationForm(forms.ModelForm):
         self.fields["race_category"].widget.attrs["class"] = "form-select"
         self.fields["gender"].widget.attrs["class"] = "form-select"
         self.fields["t_shirt_size"].widget.attrs["class"] = "form-select"
+        self.fields["payment_method"].widget.attrs["class"] = "form-select"
         self.fields["terms_accepted"].widget.attrs["class"] = "form-check-input"
         self.fields["whatsapp"].required = False
         self.fields["team_name"].required = False
